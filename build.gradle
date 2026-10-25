@@ -9,8 +9,8 @@ plugins {
 description = 'Spring Statemachine'
 
 repositories {
-	maven { url 'https://repo.spring.io/snapshot' }
-	maven { url 'https://repo.spring.io/release' }
+	maven { url = uri('https://repo.spring.io/snapshot') }
+	maven { url = uri('https://repo.spring.io/release') }
 	mavenCentral()
 }
 
@@ -36,11 +36,11 @@ dependencies {
 	api('org.springframework:spring-context')
 	api('io.projectreactor:reactor-core')
 	compileOnly 'org.springframework.security:spring-security-core'
-	compileOnly 'com.google.code.findbugs:jsr305'
+	compileOnly "com.google.code.findbugs:jsr305:${findbugsVersion}"
 	testImplementation 'org.springframework:spring-web'
 	testImplementation 'org.springframework:spring-webmvc'
 	testImplementation 'org.springframework.boot:spring-boot-test'
-	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+	testImplementation "org.junit.jupiter:junit-jupiter-engine"
 	testImplementation 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.mockito:mockito-junit-jupiter'
 	testImplementation 'io.projectreactor:reactor-test'
@@ -51,6 +51,12 @@ dependencies {
 	testImplementation 'org.assertj:assertj-core'
 	testFixturesImplementation 'org.assertj:assertj-core'
 	testFixturesImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
 tasks.withType(Test).configureEach {
