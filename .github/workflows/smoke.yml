@@ -26,7 +26,7 @@ jobs:
     - name: Setup JDK
       uses: actions/setup-java@v6
       with:
-        distribution: adopt
+        distribution: temurin
         java-version: ${{ matrix.java }}
         cache: gradle
     - name: Build with Gradle
