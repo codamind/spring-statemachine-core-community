@@ -1,6 +1,8 @@
 plugins {
-	id "base"
-	id 'org.springframework.statemachine.root'
+	id 'java-library'
+	id 'java-test-fixtures'
+	id 'org.springframework.boot'
+	id 'io.spring.dependency-management' version '1.1.7' // Handles version-less dependencies
 	id 'maven-publish'
 }
 
@@ -12,16 +14,46 @@ repositories {
 	mavenCentral()
 }
 
-allprojects {
-	group = 'org.springframework.statemachine'
-
-	repositories {
-		maven { url 'https://repo.spring.io/snapshot' }
-		maven { url 'https://repo.spring.io/release' }
-		mavenCentral()
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
 	}
+}
 
-	configurations.all {
-		resolutionStrategy.cacheChangingModulesFor 1, 'hours'
-	}
+description = 'Spring Statemachine Core Community'
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}
+
+dependencies {
+	api('org.springframework:spring-tx')
+	api('org.springframework:spring-messaging')
+	api('org.springframework:spring-context')
+	api('io.projectreactor:reactor-core')
+	compileOnly 'org.springframework.security:spring-security-core'
+	compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+	testImplementation 'org.springframework:spring-web'
+	testImplementation 'org.springframework:spring-webmvc'
+	testImplementation 'org.springframework.boot:spring-boot-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+	testImplementation 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.mockito:mockito-junit-jupiter'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'org.awaitility:awaitility'
+	testImplementation 'org.springframework.security:spring-security-config'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'io.projectreactor.tools:blockhound:1.0.17.RELEASE'
+	testImplementation 'jakarta.servlet:jakarta.servlet-api'
+	testImplementation 'org.assertj:assertj-core'
+	testFixturesImplementation 'org.assertj:assertj-core'
+	testFixturesImplementation 'io.projectreactor:reactor-test'
+}
+
+tasks.withType(Test).configureEach {
+	useJUnitPlatform()
 }
