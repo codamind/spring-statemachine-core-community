@@ -1,6 +1,6 @@
 # Copilot instructions
 
-Spring Statemachine Core (community fork): a single-module Gradle library (`java-library`, `java-test-fixtures`) built on Spring Framework and Project Reactor. Main code is under `org.springframework.statemachine` (`action`, `config`, `guard`, `state`, `transition`, `trigger`, `region`, `persist`, `service`, `support`, ...).
+Spring Statemachine Core (community fork): a single-module Gradle library (`java-library`) built on Spring Framework and Project Reactor. Main code is under `org.springframework.statemachine` (`action`, `config`, `guard`, `state`, `transition`, `trigger`, `region`, `persist`, `service`, `support`, ...).
 
 ## Environment
 
@@ -24,7 +24,7 @@ Spring Statemachine Core (community fork): a single-module Gradle library (`java
 - Use assignment syntax in Groovy DSL (`url = uri('...')`, `enabled = false`), not the deprecated space-assignment syntax.
 - Keep build settings (`org.gradle.parallel`, `org.gradle.caching`, `org.gradle.jvmargs`) in `gradle.properties`, not in `gradle-wrapper.properties`.
 - Use `tasks.withType(...).configureEach`, not eager task configuration.
-- Public API stays on `api(...)`; test-only libraries on `testImplementation`; shared test helpers in `src/testFixtures`.
+- Public API stays on `api(...)`; test-only libraries on `testImplementation`; shared test helpers (e.g. `TestUtils`) live in `src/test`.
 
 ## Code style
 
